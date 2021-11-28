@@ -6,9 +6,6 @@ set autoread " read again if file changed
 set backspace=indent,eol,start " backspace over anything
 set virtualedit=all " block select passed eol
 
-" copy/paste
-autocmd TextYankPost * call system('echo '.shellescape(join(v:event.regcontents, "\<CR>")).' |  clip.exe')
-
 " interface
 syntax enable
 set title " show title of file
