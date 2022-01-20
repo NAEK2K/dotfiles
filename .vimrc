@@ -46,8 +46,8 @@ set tw=80
 set history=1000
 set undofile
 set undodir=~/.vim/undo
-if empty(glob('~/.config/nvim/undo'))
-    silent !mkdir -p ~/.config/nvim/undo
+if empty(glob('~/.config/vim/undo'))
+    silent !mkdir -p ~/.config/vim/undo
 endif
 
 " spaces / tabs
