@@ -1,3 +1,31 @@
+" Data directory for installations
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+
+" Install vim-plug
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+" Run PlugInstall if there are missing plugins
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \| PlugInstall --sync | source $MYVIMRC
+\| endif
+
+" Init plugins
+call plug#begin()
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+call plug#end()
+
+" Install molokai if not installed
+if empty(glob(data_dir . '/colors/molokai.vim'))
+  silent execute '!curl -fLo '.data_dir.'/colors/molokai.vim --create-dirs  https://raw.githubusercontent.com/tomasr/molokai/master/colors/molokai.vim'
+endif
+
+colorscheme molokai
+
 " misc
 filetype plugin on
 set termguicolors
@@ -46,8 +74,8 @@ set tw=80
 set history=1000
 set undofile
 set undodir=~/.vim/undo
-if empty(glob('~/.config/vim/undo'))
-    silent !mkdir -p ~/.config/vim/undo
+if empty(glob('~/.config/nvim/undo'))
+    silent !mkdir -p ~/.config/nvim/undo
 endif
 
 " spaces / tabs
@@ -65,3 +93,4 @@ set ignorecase
 set incsearch " show matches in realtime
 set gdefault " automatically global
 set hlsearch " highlight all searches
+
